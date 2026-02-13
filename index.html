@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <title>Faiyaz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     *{
       box-sizing:border-box;
     }
+
     body{
+      cursor: default;
       margin:0;
       background:#080808;
       color:#eaeaea;
@@ -16,36 +19,60 @@
       display:flex;
       justify-content:center;
     }
+
     .container{
       max-width:700px;
       padding:80px 30px;
     }
+
     h1{
       font-size:42px;
       font-weight:normal;
       letter-spacing:3px;
       margin-bottom:80px;
     }
+
     .shayari{
       font-size:22px;
       line-height:2;
       margin-bottom:70px;
+      opacity:0;
+      transform: translateY(20px);
+      animation: fadeUp 1.2s ease forwards;
     }
+
+    .shayari:first-of-type{
+      animation-delay: 0.2s;
+    }
+
+    .shayari:last-of-type{
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeUp{
+      to{
+        opacity:1;
+        transform: translateY(0);
+      }
+    }
+
     .divider{
       width:60px;
       height:1px;
       background:#444;
       margin:60px 0;
     }
+
     footer{
-      margin-top:120px;
-      font-size:14px;
-      color:#777;
+      margin-top:140px;
+      font-size:13px;
+      color:#555;
+      letter-spacing:1px;
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="container">
     <h1>FAIYAZ</h1>
 
@@ -67,6 +94,5 @@
       © Faiyaz
     </footer>
   </div>
-
 </body>
 </html>
