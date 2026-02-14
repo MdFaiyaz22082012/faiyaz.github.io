@@ -48,15 +48,13 @@
       font-size:26px;
       line-height:2;
       opacity:0;
-      transform:translateY(30px);
-      animation:fadeUp 1.4s ease forwards;
+      transform:translateY(40px);
+      transition: all 1.4s ease;
     }
 
-    @keyframes fadeUp{
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+    .shayari.show{
+      opacity:1;
+      transform:translateY(0);
     }
 
     footer{
@@ -78,7 +76,7 @@
       </div>
     </section>
 
-    <!-- SHAYARI (THE ONLY ONE THAT MATTERS) -->
+    <!-- SHAYARI -->
     <section class="section">
       <div class="content">
         <div class="shayari">
@@ -94,5 +92,21 @@
     </section>
 
   </div>
+
+  <!-- ANIMATION TRIGGER -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll(".shayari").forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
 </body>
 </html>
