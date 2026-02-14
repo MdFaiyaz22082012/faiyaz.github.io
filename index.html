@@ -3,155 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <title>Faiyaz — Shayari Diwan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital@0;1&family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@400;500&family=Great+Vibes&family=Noto+Nastaliq+Urdu:wght@600&display=swap" rel="stylesheet">
 
 <style>
-/* RESET */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+/* ================= RESET ================= */
+*{ margin:0; padding:0; box-sizing:border-box; }
 
-/* BACKGROUND */
+/* ================= BODY ================= */
 body{
-    background:#0f0f0f;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    font-family:'Playfair Display', serif;
+  background:#0a0a0a;
+  font-family:"Playfair Display", serif;
 }
 
-/* PAGE */
+/* =====================================================
+   UNIVERSAL PAGE WRAPPER  (DO NOT TOUCH)
+   ===================================================== */
 .page{
-    width:800px;
-    min-height:1100px;
-    background:
-        linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)),
-        url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-    background-color:#f6f1e7;
-    border:1px solid rgba(0,0,0,0.25);
-    padding:80px 90px;
-    position:relative;
+  width:100vw;
+  min-height:100vh;
+  position:relative;
 }
 
-/* DIWAN BORDER */
-.page::before{
-    content:"";
-    position:absolute;
-    top:30px;
-    left:30px;
-    right:30px;
-    bottom:30px;
-    border:2px solid rgba(0,0,0,0.15);
-    pointer-events:none;
-}
-
-/* TOP NAME */
-.name-calligraphy{
-    text-align:center;
-    font-family:'Great Vibes', cursive;
-    font-size:72px;
-    color:#2b2b2b;
-    margin-bottom:10px;
-}
-
-/* TAGLINE */
-.tagline{
-    text-align:center;
-    font-family:'Cinzel', serif;
-    letter-spacing:4px;
-    font-size:14px;
-    color:#555;
-    margin-bottom:120px;
-}
-
-/* SHAYARI */
-.shayari{
-    text-align:center;
-    font-size:28px;
-    line-height:1.8;
-    color:#1f1f1f;
-    padding:0 40px;
-}
-
-/* ADOPTED */
-.adopted{
-    text-align:center;
-    font-style:italic;
-    margin-top:30px;
-    color:#666;
-}
-
-/* NEXT PAGE TEXT */
-.next-page{
-    position:absolute;
-    bottom:150px;
-    width:100%;
-    text-align:center;
-    font-family:'Cinzel', serif;
-    letter-spacing:3px;
-    font-size:14px;
-    color:#555;
-}
-
-/* PAGE NUMBER */
+/* =====================================================
+   PAGE NUMBER — LOCKED & CLASSY
+   ===================================================== */
 .page-number{
-    position:absolute;
-    bottom:80px;
-    width:100%;
-    text-align:center;
-    font-family:'Cinzel', serif;
-    font-size:16px;
-    letter-spacing:2px;
-    color:#222;
+  position:absolute;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'Cinzel', serif;
+  font-size:13px;
+  letter-spacing:3px;
+  color:#555;
 }
 
-/* FOOTER */
+/* =====================================================
+   ================= PAGE 01 =================
+   SCROLL STYLE — FIRST PART
+   ===================================================== */
+.page.scroll-page{
+  padding:180px 10vw 140px;
+  background:#f4ecd8;
+  box-shadow: inset 0 0 120px rgba(0,0,0,0.25);
+  animation: unroll 1.6s ease forwards;
+  transform-origin:top;
+}
+
+@keyframes unroll{
+  from{ transform:scaleY(0); }
+  to{ transform:scaleY(1); }
+}
+
+.scroll-page::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  box-shadow: inset 0 0 120px rgba(0,0,0,0.35);
+  pointer-events:none;
+}
+
+.scroll-page::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.025), rgba(0,0,0,0.025) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02) 1px, transparent 1px, transparent 4px);
+  pointer-events:none;
+}
+
+.content{
+  max-width:760px;
+  margin:0 auto;
+  text-align:center;
+}
+
+/* PAGE 01 TEXT */
+.name{ font-size:44px; letter-spacing:2px; color:#1e1e1e; }
+.calligraphy{ font-family:"Noto Nastaliq Urdu", serif; font-size:46px; margin-bottom:40px; }
+.tagline{ font-size:13px; letter-spacing:4px; color:#555; margin-bottom:80px; }
+.divider{ width:120px; height:1px; background:#333; margin:0 auto 80px; opacity:0.6; }
+
+.shayari.fade{
+  font-size:24px;
+  line-height:2;
+  color:#222;
+  opacity:0;
+  transform:translateY(28px);
+  animation:fadeUp 1.6s ease forwards;
+  animation-delay:1.9s;
+}
+
+@keyframes fadeUp{
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* =====================================================
+   ================= PAGE 02 =================
+   DIWAN STYLE — SECOND PART
+   ===================================================== */
+.page.diwan-page{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#0f0f0f;
+}
+
+.diwan{
+  width:800px;
+  min-height:1100px;
+  background:
+    linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)),
+    url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  background-color:#f6f1e7;
+  border:1px solid rgba(0,0,0,0.25);
+  padding:80px 90px;
+  position:relative;
+}
+
+.diwan::before{
+  content:"";
+  position:absolute;
+  inset:30px;
+  border:2px solid rgba(0,0,0,0.15);
+  pointer-events:none;
+}
+
+.name-calligraphy{
+  text-align:center;
+  font-family:'Great Vibes', cursive;
+  font-size:72px;
+  margin-bottom:10px;
+}
+
+.diwan .tagline{
+  text-align:center;
+  margin-bottom:120px;
+}
+
+.diwan .shayari{
+  text-align:center;
+  font-size:28px;
+  line-height:1.8;
+  padding:0 40px;
+}
+
+.adopted{
+  text-align:center;
+  font-style:italic;
+  margin-top:30px;
+  color:#666;
+}
+
+.next-page{
+  position:absolute;
+  bottom:150px;
+  width:100%;
+  text-align:center;
+  font-family:'Cinzel', serif;
+  letter-spacing:3px;
+  font-size:14px;
+  color:#555;
+}
+
 .footer{
-    position:absolute;
-    bottom:40px;
-    width:100%;
-    text-align:center;
-    font-size:12px;
-    color:#555;
+  position:absolute;
+  bottom:40px;
+  width:100%;
+  text-align:center;
+  font-size:12px;
+  color:#555;
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<!-- ================= PAGE 01 ================= -->
+<section class="page scroll-page">
+  <div class="content">
+    <div class="name">Faiyaz</div>
+    <div class="calligraphy">فَيَّاز</div>
 
-    <!-- NAME -->
+    <div class="tagline">SHAYARI · POETRY · CREATIVITY</div>
+    <div class="divider"></div>
+
+    <div class="shayari fade">
+      Jo kismat mein nahi hota na,<br>
+      usse mohabbat kamaal ki hoti hai.
+    </div>
+  </div>
+
+  <div class="page-number">-01-</div>
+</section>
+
+<!-- ================= PAGE 02 ================= -->
+<section class="page diwan-page">
+  <div class="diwan">
+
     <div class="name-calligraphy">Faiyaz</div>
-
-    <!-- TAGLINE -->
     <div class="tagline">SHAYARI · POETRY · CREATIVITY</div>
 
-    <!-- SHAYARI CONTENT -->
     <div class="shayari">
-        Na kurta, na pathani salwaar,<br>
-        Mard wo hai jo dil de,<br>
-        warna sab bekaar.
+      Na kurta, na pathani salwaar,<br>
+      Mard wo hai jo dil de,<br>
+      warna sab bekaar.
     </div>
 
-    <!-- ADOPTED CREDIT -->
     <div class="adopted">~ adopted ~</div>
-
-    <!-- NEXT PAGE -->
     <div class="next-page">Next page · New dream</div>
-
-    <!-- PAGE NUMBER -->
-    <div class="page-number">— 02 —</div>
-
-    <!-- FOOTER -->
     <div class="footer">© Faiyaz</div>
+    <div class="page-number">-02-</div>
 
-</div>
+  </div>
+</section>
 
 </body>
 </html>
