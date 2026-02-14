@@ -23,15 +23,14 @@ body{
   min-height:100vh;
   padding:180px 10vw 140px;
   background:#f4ecd8;
-  box-shadow:
-    inset 0 0 120px rgba(0,0,0,0.25);
+  box-shadow: inset 0 0 120px rgba(0,0,0,0.25);
   transform: scaleY(0);
   transform-origin: top;
   animation: unroll 1.6s ease forwards;
   overflow:hidden;
 }
 
-/* SOFT VIGNETTE (replaces ugly black gaps) */
+/* VIGNETTE */
 .scroll::before{
   content:"";
   position:absolute;
@@ -63,14 +62,13 @@ body{
   pointer-events:none;
 }
 
-/* CENTER CONTENT WIDTH */
+/* CENTER CONTENT */
 .content{
   max-width:760px;
   margin:0 auto;
   text-align:center;
 }
 
-/* ANIMATION */
 @keyframes unroll{
   to{ transform: scaleY(1); }
 }
@@ -157,6 +155,17 @@ footer{
   stroke:#555;
   stroke-width:1.6;
 }
+
+/* PAGE NUMBER — CLASSIC */
+.page-number{
+  position:absolute;
+  bottom:26px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:13px;
+  letter-spacing:3px;
+  color:#666;
+}
 </style>
 </head>
 
@@ -203,6 +212,10 @@ footer{
     </footer>
 
   </div>
+
+  <!-- PAGE NUMBER -->
+  <div class="page-number">-01-</div>
+
 </div>
 
 </body>
