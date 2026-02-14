@@ -5,6 +5,9 @@
 <title>Faiyaz — Shayari</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 *{
   box-sizing:border-box;
@@ -25,70 +28,87 @@ body{
   padding:90px 35px;
 }
 
-/* SCROLL OUTLINE */
+/* SCROLL OUTLINE WITH TEXTURE */
 .scroll{
-  border:2px solid rgba(200,170,90,0.65);
-  padding:70px 40px;
   position:relative;
+  padding:75px 45px;
+  border:3px solid transparent;
+  background:
+    linear-gradient(#0b0b0b, #0b0b0b) padding-box,
+    repeating-linear-gradient(
+      45deg,
+      rgba(200,170,90,0.45),
+      rgba(200,170,90,0.45) 4px,
+      rgba(160,130,70,0.45) 8px
+    ) border-box;
   box-shadow:
-    inset 0 0 25px rgba(200,170,90,0.15),
-    0 0 40px rgba(0,0,0,0.8);
+    inset 0 0 35px rgba(200,170,90,0.18),
+    0 0 50px rgba(0,0,0,0.9);
 }
 
-/* CORNERS – ANCIENT FEEL */
+/* ANCIENT CORNERS */
 .scroll::before,
 .scroll::after{
   content:"";
   position:absolute;
-  width:40px;
-  height:40px;
+  width:48px;
+  height:48px;
   border:2px solid rgba(200,170,90,0.7);
 }
 
 .scroll::before{
-  top:-2px;
-  left:-2px;
+  top:-3px;
+  left:-3px;
   border-right:none;
   border-bottom:none;
 }
 
 .scroll::after{
-  bottom:-2px;
-  right:-2px;
+  bottom:-3px;
+  right:-3px;
   border-left:none;
   border-top:none;
 }
 
-/* TITLE */
+/* NAME — CALLIGRAPHY */
 h1{
-  font-size:40px;
-  font-weight:normal;
-  letter-spacing:3px;
-  margin-bottom:35px;
+  font-family:"Great Vibes", cursive;
+  font-size:64px;
+  font-weight:400;
+  letter-spacing:2px;
+  margin-bottom:30px;
   text-align:center;
+  color:#e6d39a;
 }
 
 /* INTRO */
 .intro{
-  font-size:15px;
-  letter-spacing:2px;
+  font-size:14px;
+  letter-spacing:3px;
   color:#999;
   text-align:center;
-  margin-bottom:70px;
+  margin-bottom:75px;
   opacity:0;
   animation: fadeUp 1.2s ease forwards;
   animation-delay:0.2s;
 }
 
-/* SHAYARI */
+/* SHAYARI — DEFAULT (HINGLISH/HINDI) */
 .shayari{
   font-size:24px;
   line-height:2;
   text-align:center;
   opacity:0;
-  transform: translateY(25px);
-  animation: fadeUp 1.5s ease forwards;
+  transform: translateY(28px);
+  animation: fadeUp 1.6s ease forwards;
   animation-delay:0.6s;
+}
+
+/* URDU MODE */
+.urdu{
+  font-family:"Noto Nastaliq Urdu", serif;
+  font-size:26px;
+  line-height:2.2;
 }
 
 /* ANIMATION */
@@ -110,10 +130,10 @@ footer{
 
 /* SOCIAL */
 .social{
-  margin-top:20px;
+  margin-top:22px;
   display:flex;
   justify-content:center;
-  gap:22px;
+  gap:26px;
 }
 
 .social a{
@@ -137,6 +157,7 @@ footer{
 
 <body>
   <div class="container">
+
     <div class="scroll">
 
       <h1>Faiyaz</h1>
@@ -145,10 +166,18 @@ footer{
         SHAYARI • WORDS • QUIET CREATIVITY
       </div>
 
+      <!-- Change class to "shayari urdu" when you want Urdu -->
       <div class="shayari">
         “Jo kismat me nahi hota na,<br>
         usse mohabbat kamaal ki hoti hai.”
       </div>
+
+      <!-- Example Urdu (keep commented till needed)
+      <div class="shayari urdu">
+        جو قسمت میں نہیں ہوتا نا،<br>
+        اس سے محبت کمال کی ہوتی ہے۔
+      </div>
+      -->
 
     </div>
 
@@ -157,7 +186,6 @@ footer{
 
       <div class="social">
 
-        <!-- Instagram -->
         <a href="https://instagram.com/faiyaz.1213" target="_blank">
           <svg viewBox="0 0 24 24">
             <rect x="3" y="3" width="18" height="18" rx="5"></rect>
@@ -167,7 +195,6 @@ footer{
           instagram.com/faiyaz.1213
         </a>
 
-        <!-- Mail -->
         <a href="mailto:mdfaiyaz22082012@gmail.com">
           <svg viewBox="0 0 24 24">
             <rect x="3" y="5" width="18" height="14" rx="2"></rect>
@@ -178,6 +205,7 @@ footer{
 
       </div>
     </footer>
+
   </div>
 </body>
 </html>
