@@ -36,7 +36,6 @@
 
     .content{
       max-width:700px;
-      text-align:left;
     }
 
     h1{
@@ -67,18 +66,33 @@
 
     footer{
       margin-top:100px;
+      display:flex;
+      align-items:center;
+      gap:22px;
       font-size:13px;
       color:#666;
       letter-spacing:1px;
     }
 
-    footer a{
+    .icon-link{
+      display:flex;
+      align-items:center;
+      gap:8px;
       color:#aaa;
       text-decoration:none;
-      margin-right:20px;
     }
 
-    footer a:hover{
+    .icon-link svg{
+      width:16px;
+      height:16px;
+      stroke:#aaa;
+      fill:none;
+      stroke-width:1.6;
+    }
+
+    .icon-link:hover svg,
+    .icon-link:hover{
+      stroke:#fff;
       color:#fff;
     }
   </style>
@@ -87,7 +101,7 @@
 <body>
   <div class="container">
 
-    <!-- TITLE + INTRO -->
+    <!-- TITLE -->
     <section class="section">
       <div class="content">
         <h1>FAIYAZ</h1>
@@ -107,11 +121,22 @@
         </div>
 
         <footer>
-          <a href="https://instagram.com/faiyaz.1213" target="_blank">
+          <!-- Instagram -->
+          <a class="icon-link" href="https://instagram.com/faiyaz.1213" target="_blank">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="0.8"></circle>
+            </svg>
             IG
           </a>
 
-          <a href="mailto:mdfaiyaz22082012@gmail.com">
+          <!-- Mail -->
+          <a class="icon-link" href="mailto:mdfaiyaz22082012@gmail.com">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="M2 6l10 7 10-7"></path>
+            </svg>
             MAIL
           </a>
 
