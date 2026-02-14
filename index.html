@@ -11,7 +11,13 @@
 <style>
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',serif;background:#0b0b0b;}
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:'Playfair Display',serif;
+  background:#0b0b0b;
+}
 
 /* BOOK */
 .book{
@@ -25,7 +31,6 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
   position:absolute;
   inset:0;
   padding:160px 10vw 120px;
-  background:#f4ecd8;
   display:flex;
   justify-content:center;
   align-items:flex-start;
@@ -34,26 +39,50 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
   transition:transform 1s ease, opacity .8s ease;
 }
 
-/* ACTIVE PAGE */
-.page.active{
-  opacity:1;
-  transform:translateX(0);
-  z-index:2;
-}
+/* PAGE STATES */
+.page.active{opacity:1;transform:translateX(0);z-index:2;}
+.page.prev{transform:translateX(-100%);}
 
-/* PREVIOUS PAGE */
-.page.prev{
-  transform:translateX(-100%);
+/* PAGE 01 — PAPER SCROLL */
+.page.paper{
+  background:#f4ecd8;
 }
-
-/* PAPER TEXTURE */
-.page::before{
+.page.paper::before{
   content:"";
   position:absolute;
   inset:0;
   background:
     repeating-linear-gradient(0deg,rgba(0,0,0,.03),rgba(0,0,0,.03) 1px,transparent 1px,transparent 3px),
     repeating-linear-gradient(90deg,rgba(0,0,0,.02),rgba(0,0,0,.02) 1px,transparent 1px,transparent 4px);
+  pointer-events:none;
+}
+
+/* PAGE 02 — KURTA / SHAWL FABRIC */
+.page.fabric{
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 70%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.03),
+      rgba(0,0,0,0.03) 2px,
+      transparent 2px,
+      transparent 6px
+    ),
+    #efe5cf;
+}
+.page.fabric::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(120,90,40,0.08),
+      rgba(120,90,40,0.08) 1px,
+      transparent 1px,
+      transparent 14px
+    );
+  opacity:.35;
   pointer-events:none;
 }
 
@@ -65,24 +94,21 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
   color:#1f1f1f;
 }
 
-/* HEAD */
-.name{
-  font-size:42px;
-  letter-spacing:2px;
-}
+/* HEADINGS */
+.name{font-size:42px;letter-spacing:2px;}
 .calligraphy{
-  font-family:'Noto Nastaliq Urdu', serif;
+  font-family:'Noto Nastaliq Urdu',serif;
   font-size:46px;
   margin-top:8px;
 }
 .name-calligraphy{
-  font-family:'Great Vibes', cursive;
+  font-family:'Great Vibes',cursive;
   font-size:72px;
 }
 
 /* TAGLINE */
 .tagline{
-  font-family:'Cinzel', serif;
+  font-family:'Cinzel',serif;
   font-size:13px;
   letter-spacing:4px;
   color:#555;
@@ -114,7 +140,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
   margin-top:80px;
   background:none;
   border:none;
-  font-family:'Cinzel', serif;
+  font-family:'Cinzel',serif;
   font-size:13px;
   letter-spacing:3px;
   cursor:pointer;
@@ -151,7 +177,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
   bottom:30px;
   left:50%;
   transform:translateX(-50%);
-  font-family:'Cinzel', serif;
+  font-family:'Cinzel',serif;
   letter-spacing:3px;
   font-size:13px;
   color:#555;
@@ -164,7 +190,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
 <div class="book">
 
 <!-- PAGE 01 -->
-<section class="page active" data-index="0">
+<section class="page paper active" data-index="0">
   <div class="content">
     <div class="name">Faiyaz</div>
     <div class="calligraphy">فَيَّاز</div>
@@ -201,7 +227,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
 </section>
 
 <!-- PAGE 02 -->
-<section class="page" data-index="1">
+<section class="page fabric" data-index="1">
   <div class="content">
     <div class="name-calligraphy">Faiyaz</div>
     <div class="tagline">SHAYARI · POETRY · CREATIVITY</div>
@@ -241,29 +267,22 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Playfair Display',
 </div>
 
 <script>
-const pages = document.querySelectorAll('.page');
-let current = 0;
+const pages=document.querySelectorAll('.page');
+let current=0;
 
 function updatePages(){
   pages.forEach((p,i)=>{
     p.classList.remove('active','prev');
-    if(i === current) p.classList.add('active');
-    else if(i < current) p.classList.add('prev');
+    if(i===current)p.classList.add('active');
+    else if(i<current)p.classList.add('prev');
   });
 }
+function goNext(){ if(current<pages.length-1){current++;updatePages();} }
+function goPrev(){ if(current>0){current--;updatePages();} }
 
-function goNext(){
-  if(current < pages.length-1){ current++; updatePages(); }
-}
-
-function goPrev(){
-  if(current > 0){ current--; updatePages(); }
-}
-
-/* KEYBOARD NAV */
 document.addEventListener('keydown',e=>{
-  if(e.key === 'ArrowRight' || e.key === ' '){ goNext(); }
-  if(e.key === 'ArrowLeft'){ goPrev(); }
+  if(e.key==='ArrowRight'||e.key===' ')goNext();
+  if(e.key==='ArrowLeft')goPrev();
 });
 </script>
 
