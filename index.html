@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@400;500&family=Great+Vibes&family=Noto+Nastaliq+Urdu:wght@600&display=swap" rel="stylesheet">
 
 <style>
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
-
 html,body{
   width:100%;
   height:100%;
+  overflow:hidden;
   font-family:'Playfair Display',serif;
   background:#0b0b0b;
-  overflow:hidden;
 }
 
 /* BOOK */
@@ -26,11 +26,11 @@ html,body{
   position:relative;
 }
 
-/* PAGE */
+/* PAGE BASE */
 .page{
   position:absolute;
   inset:0;
-  padding:120px 8vw 160px;
+  padding:140px 10vw 110px;
   display:flex;
   justify-content:center;
   align-items:flex-start;
@@ -39,41 +39,35 @@ html,body{
   transition:transform 1s ease, opacity .8s ease;
 }
 
+/* PAGE STATES */
 .page.active{opacity:1;transform:translateX(0);z-index:2;}
 .page.prev{transform:translateX(-100%);}
 
-/* PAPER */
+/* PAGE 01 — PAPER */
 .page.paper{
   background:#f4ecd8;
 }
-.page.paper::before{
+.page.paper::after{
   content:"";
   position:absolute;
   inset:0;
   background:
     repeating-linear-gradient(0deg,rgba(0,0,0,.03),rgba(0,0,0,.03) 1px,transparent 1px,transparent 3px),
     repeating-linear-gradient(90deg,rgba(0,0,0,.02),rgba(0,0,0,.02) 1px,transparent 1px,transparent 4px);
+  pointer-events:none;
 }
 
-/* FABRIC */
+/* PAGE 02 — FABRIC */
 .page.fabric{
   background:
-    radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 70%),
-    repeating-linear-gradient(45deg,rgba(0,0,0,.03),rgba(0,0,0,.03) 2px,transparent 2px,transparent 6px),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.035),
+      rgba(0,0,0,0.035) 2px,
+      transparent 2px,
+      transparent 6px
+    ),
     #efe5cf;
-}
-.page.fabric::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:repeating-linear-gradient(
-    90deg,
-    rgba(120,90,40,.08),
-    rgba(120,90,40,.08) 1px,
-    transparent 1px,
-    transparent 14px
-  );
-  opacity:.35;
 }
 
 /* CONTENT */
@@ -84,19 +78,28 @@ html,body{
   color:#1f1f1f;
 }
 
-/* TEXT */
+/* HEADINGS */
 .name{font-size:42px;letter-spacing:2px;}
-.calligraphy{font-family:'Noto Nastaliq Urdu';font-size:46px;margin-top:8px;}
-.name-calligraphy{font-family:'Great Vibes';font-size:72px;}
+.calligraphy{
+  font-family:'Noto Nastaliq Urdu',serif;
+  font-size:46px;
+  margin-top:6px;
+}
+.name-calligraphy{
+  font-family:'Great Vibes',cursive;
+  font-size:72px;
+}
 
+/* TAGLINE */
 .tagline{
-  font-family:'Cinzel';
+  font-family:'Cinzel',serif;
   font-size:13px;
   letter-spacing:4px;
   color:#555;
   margin:60px 0;
 }
 
+/* SHAYARI */
 .shayari{
   font-size:26px;
   line-height:1.9;
@@ -109,28 +112,33 @@ html,body{
   to{opacity:1;transform:translateY(0);}
 }
 
-.adopted{font-style:italic;color:#666;margin-top:20px;}
+/* ADOPTED */
+.adopted{
+  font-style:italic;
+  color:#666;
+  margin-top:18px;
+}
 
-/* BUTTON */
+/* NAV BUTTON */
 .next-btn{
-  margin-top:60px;
+  margin:60px auto 0;
+  display:block;
   background:none;
   border:none;
-  font-family:'Cinzel';
+  font-family:'Cinzel',serif;
   font-size:13px;
   letter-spacing:3px;
   cursor:pointer;
   color:#444;
 }
-.next-btn:disabled{opacity:.3;cursor:default;}
+.next-btn:hover{opacity:.6;}
 
-/* SOCIAL */
+/* SOCIAL — ALWAYS VISIBLE */
 .social{
-  margin-top:60px;
+  margin-top:40px;
   display:flex;
-  flex-wrap:wrap;
   justify-content:center;
-  gap:24px;
+  gap:26px;
   font-size:12px;
 }
 .social a{
@@ -151,19 +159,13 @@ html,body{
 /* PAGE NUMBER */
 .page-number{
   position:absolute;
-  bottom:25px;
+  bottom:24px;
   left:50%;
   transform:translateX(-50%);
-  font-family:'Cinzel';
+  font-family:'Cinzel',serif;
   letter-spacing:3px;
   font-size:13px;
   color:#555;
-}
-
-/* MOBILE */
-@media(max-height:700px){
-  .page{padding-top:80px;padding-bottom:140px;}
-  .shayari{font-size:22px;}
 }
 </style>
 </head>
@@ -173,7 +175,7 @@ html,body{
 <div class="book">
 
 <!-- PAGE 01 -->
-<section class="page paper active">
+<section class="page paper active" data-index="0">
   <div class="content">
     <div class="name">Faiyaz</div>
     <div class="calligraphy">فَيَّاز</div>
@@ -189,11 +191,18 @@ html,body{
 
     <div class="social">
       <a href="https://instagram.com/faiyaz.1213" target="_blank">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.8"/>
+        </svg>
         instagram.com/faiyaz.1213
       </a>
       <a href="mailto:mdfaiyaz22082012@gmail.com">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3,7 12,13 21,7"/></svg>
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <polyline points="3,7 12,13 21,7"/>
+        </svg>
         mdfaiyaz22082012@gmail.com
       </a>
     </div>
@@ -202,9 +211,10 @@ html,body{
 </section>
 
 <!-- PAGE 02 -->
-<section class="page fabric">
+<section class="page fabric" data-index="1">
   <div class="content">
     <div class="name-calligraphy">Faiyaz</div>
+
     <div class="tagline">SHAYARI · POETRY · CREATIVITY</div>
 
     <div class="shayari">
@@ -215,11 +225,24 @@ html,body{
 
     <div class="adopted">~ adopted ~</div>
 
-    <button class="next-btn" disabled>END</button>
+    <button class="next-btn" onclick="goPrev()">PREVIOUS PAGE</button>
 
     <div class="social">
-      <a href="https://instagram.com/faiyaz.1213" target="_blank">Instagram</a>
-      <a href="mailto:mdfaiyaz22082012@gmail.com">Mail</a>
+      <a href="https://instagram.com/faiyaz.1213" target="_blank">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.8"/>
+        </svg>
+        instagram.com/faiyaz.1213
+      </a>
+      <a href="mailto:mdfaiyaz22082012@gmail.com">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <polyline points="3,7 12,13 21,7"/>
+        </svg>
+        mdfaiyaz22082012@gmail.com
+      </a>
     </div>
   </div>
   <div class="page-number">-02-</div>
@@ -228,32 +251,32 @@ html,body{
 </div>
 
 <script>
-const pages=[...document.querySelectorAll('.page')];
+const pages=document.querySelectorAll('.page');
 let current=0;
 
-function update(){
+function updatePages(){
   pages.forEach((p,i)=>{
-    p.classList.toggle('active',i===current);
-    p.classList.toggle('prev',i<current);
+    p.classList.remove('active','prev');
+    if(i===current)p.classList.add('active');
+    else if(i<current)p.classList.add('prev');
   });
 }
-function goNext(){ if(current<pages.length-1){current++;update();} }
-function goPrev(){ if(current>0){current--;update();} }
+function goNext(){
+  if(current<pages.length-1){
+    current++;
+    updatePages();
+  }
+}
+function goPrev(){
+  if(current>0){
+    current--;
+    updatePages();
+  }
+}
 
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key===' ')goNext();
   if(e.key==='ArrowLeft')goPrev();
-});
-
-/* TOUCH SWIPE */
-let x0=null;
-document.addEventListener('touchstart',e=>x0=e.touches[0].clientX);
-document.addEventListener('touchend',e=>{
-  if(x0===null)return;
-  let dx=e.changedTouches[0].clientX-x0;
-  if(dx<-50)goNext();
-  if(dx>50)goPrev();
-  x0=null;
 });
 </script>
 
