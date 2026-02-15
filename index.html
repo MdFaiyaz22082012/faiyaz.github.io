@@ -1,282 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Faiyaz — Shayari Diwan</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Faiyaz — Tech Poetry</title>
 
-<!-- FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:wght@400;500&family=Great+Vibes&family=Noto+Nastaliq+Urdu:wght@600&display=swap" rel="stylesheet">
+<!-- ICONS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
 <style>
 /* RESET */
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  font-family:'Playfair Display',serif;
-  background:#0b0b0b;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-/* BOOK */
-.book{
-  width:100vw;
-  height:100vh;
-  position:relative;
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
 }
 
-/* PAGE BASE */
-.page{
-  position:absolute;
-  inset:0;
-  padding:140px 10vw 110px;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  opacity:0;
-  transform:translateX(100%);
-  transition:transform 1s ease, opacity .8s ease;
+/* CONTAINER */
+.wrapper {
+  height: 200vh;
+  transition: transform 1s cubic-bezier(.77,0,.18,1);
 }
 
-/* PAGE STATES */
-.page.active{opacity:1;transform:translateX(0);z-index:2;}
-.page.prev{transform:translateX(-100%);}
-
-/* PAGE 01 — PAPER */
-.page.paper{
-  background:#f4ecd8;
-}
-.page.paper::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    repeating-linear-gradient(0deg,rgba(0,0,0,.03),rgba(0,0,0,.03) 1px,transparent 1px,transparent 3px),
-    repeating-linear-gradient(90deg,rgba(0,0,0,.02),rgba(0,0,0,.02) 1px,transparent 1px,transparent 4px);
-  pointer-events:none;
+/* COMMON PAGE STYLE */
+.page {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  padding: 60px 40px;
 }
 
-/* PAGE 02 — FABRIC */
-.page.fabric{
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(0,0,0,0.035),
-      rgba(0,0,0,0.035) 2px,
-      transparent 2px,
-      transparent 6px
-    ),
-    #efe5cf;
+/* LOGO */
+.logo {
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-align: center;
+  animation: glitch 2s infinite;
 }
 
-/* CONTENT */
-.content{
-  max-width:780px;
-  width:100%;
-  text-align:center;
-  color:#1f1f1f;
-}
-
-/* HEADINGS */
-.name{font-size:42px;letter-spacing:2px;}
-.calligraphy{
-  font-family:'Noto Nastaliq Urdu',serif;
-  font-size:46px;
-  margin-top:6px;
-}
-.name-calligraphy{
-  font-family:'Great Vibes',cursive;
-  font-size:72px;
+@keyframes glitch {
+  0% { text-shadow: 0 0 0 #fff; }
+  20% { text-shadow: -2px 0 #fff; }
+  40% { text-shadow: 2px 0 #fff; }
+  60% { text-shadow: -1px 0 #fff; }
+  100% { text-shadow: 0 0 0 #fff; }
 }
 
 /* TAGLINE */
-.tagline{
-  font-family:'Cinzel',serif;
-  font-size:13px;
-  letter-spacing:4px;
-  color:#555;
-  margin:60px 0;
+.tagline {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  letter-spacing: 4px;
+  opacity: 0.7;
 }
 
-/* SHAYARI */
-.shayari{
-  font-size:26px;
-  line-height:1.9;
-  margin:50px 0;
-  animation:fadeUp 1.4s ease both;
+/* MAIN TEXT */
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 26px;
+  line-height: 1.6;
+  max-width: 800px;
+  animation: fadeUp 1.5s ease forwards;
 }
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(24px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* ADOPTED */
-.adopted{
-  font-style:italic;
-  color:#666;
-  margin-top:18px;
-}
-
-/* NAV BUTTON */
-.next-btn{
-  margin:60px auto 0;
-  display:block;
-  background:none;
-  border:none;
-  font-family:'Cinzel',serif;
-  font-size:13px;
-  letter-spacing:3px;
-  cursor:pointer;
-  color:#444;
-}
-.next-btn:hover{opacity:.6;}
-
-/* SOCIAL — ALWAYS VISIBLE */
-.social{
-  margin-top:40px;
-  display:flex;
-  justify-content:center;
-  gap:26px;
-  font-size:12px;
-}
-.social a{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  color:#555;
-  text-decoration:none;
-}
-.social svg{
-  width:16px;
-  height:16px;
-  fill:none;
-  stroke:#555;
-  stroke-width:1.6;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translate(-50%, -40%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
 /* PAGE NUMBER */
-.page-number{
-  position:absolute;
-  bottom:24px;
-  left:50%;
-  transform:translateX(-50%);
-  font-family:'Cinzel',serif;
-  letter-spacing:3px;
-  font-size:13px;
-  color:#555;
+.page-no {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  letter-spacing: 4px;
+  opacity: 0.6;
+}
+
+/* NEXT BUTTON */
+.next-btn {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #fff;
+  padding: 10px 22px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 3px;
+  transition: all 0.3s ease;
+}
+
+.next-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* FOOTER ICONS */
+.footer {
+  position: absolute;
+  bottom: 120px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.footer a {
+  color: #fff;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* PAGE 2 DESIGN ELEMENT */
+.tech-lines {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
 }
 </style>
 </head>
 
 <body>
 
-<div class="book">
+<div class="wrapper" id="wrapper">
 
-<!-- PAGE 01 -->
-<section class="page paper active" data-index="0">
-  <div class="content">
-    <div class="name">Faiyaz</div>
-    <div class="calligraphy">فَيَّاز</div>
-
+  <!-- PAGE 1 -->
+  <section class="page">
+    <div class="logo">FAIYAZ</div>
     <div class="tagline">SHAYARI · POETRY · CREATIVITY</div>
 
-    <div class="shayari">
-      Jo kismat mein nahi hota na,<br>
-      usse mohabbat kamaal ki hoti hai.
+    <div class="center-text">
+      Silence speaks when words collapse.<br>
+      Not every emotion needs noise.
+    </div>
+
+    <div class="footer">
+      <a href="https://instagram.com/faiyaz.1213" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="mailto:mdfaiyazz2082012@gmail.com">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
     </div>
 
     <button class="next-btn" onclick="goNext()">NEXT PAGE</button>
+    <div class="page-no">-01-</div>
+  </section>
 
-    <div class="social">
-      <a href="https://instagram.com/faiyaz.1213" target="_blank">
-        <svg viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="0.8"/>
-        </svg>
-        instagram.com/faiyaz.1213
-      </a>
-      <a href="mailto:mdfaiyaz22082012@gmail.com">
-        <svg viewBox="0 0 24 24">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <polyline points="3,7 12,13 21,7"/>
-        </svg>
-        mdfaiyaz22082012@gmail.com
-      </a>
-    </div>
-  </div>
-  <div class="page-number">-01-</div>
-</section>
+  <!-- PAGE 2 -->
+  <section class="page">
+    <div class="tech-lines"></div>
 
-<!-- PAGE 02 -->
-<section class="page fabric" data-index="1">
-  <div class="content">
-    <div class="name-calligraphy">Faiyaz</div>
-
-    <div class="tagline">SHAYARI · POETRY · CREATIVITY</div>
-
-    <div class="shayari">
-      Na kurta, na pathani salwaar,<br>
+    <div class="center-text">
+      “Na kurta, na pathani salwaar,<br>
       mard wo hai jo dil de,<br>
-      warna hai bekaar.
+      warna sab bekaar.”<br><br>
+      <span style="opacity:.6;font-size:14px;">~ adopted ~</span>
     </div>
 
-    <div class="adopted">~ adopted ~</div>
-
-    <button class="next-btn" onclick="goPrev()">PREVIOUS PAGE</button>
-
-    <div class="social">
+    <div class="footer">
       <a href="https://instagram.com/faiyaz.1213" target="_blank">
-        <svg viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="0.8"/>
-        </svg>
-        instagram.com/faiyaz.1213
+        <i class="fab fa-instagram"></i>
       </a>
-      <a href="mailto:mdfaiyaz22082012@gmail.com">
-        <svg viewBox="0 0 24 24">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <polyline points="3,7 12,13 21,7"/>
-        </svg>
-        mdfaiyaz22082012@gmail.com
+      <a href="mailto:mdfaiyazz2082012@gmail.com">
+        <i class="fa-solid fa-envelope"></i>
       </a>
     </div>
-  </div>
-  <div class="page-number">-02-</div>
-</section>
+
+    <div class="page-no">-02-</div>
+  </section>
 
 </div>
 
 <script>
-const pages=document.querySelectorAll('.page');
-let current=0;
+let page = 0;
+const wrapper = document.getElementById("wrapper");
 
-function updatePages(){
-  pages.forEach((p,i)=>{
-    p.classList.remove('active','prev');
-    if(i===current)p.classList.add('active');
-    else if(i<current)p.classList.add('prev');
-  });
-}
-function goNext(){
-  if(current<pages.length-1){
-    current++;
-    updatePages();
-  }
-}
-function goPrev(){
-  if(current>0){
-    current--;
-    updatePages();
-  }
+function goNext() {
+  page = Math.min(page + 1, 1);
+  wrapper.style.transform = `translateY(-${page * 100}vh)`;
 }
 
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowRight'||e.key===' ')goNext();
-  if(e.key==='ArrowLeft')goPrev();
+function goPrev() {
+  page = Math.max(page - 1, 0);
+  wrapper.style.transform = `translateY(-${page * 100}vh)`;
+}
+
+/* KEYBOARD NAV */
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowDown") goNext();
+  if (e.key === "ArrowUp") goPrev();
 });
 </script>
 
